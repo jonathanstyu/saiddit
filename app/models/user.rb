@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
     :class_name => "Link",
     :foreign_key => :submitter_id
   
+  has_many :comments, 
+    :foreign_key => :commenter_id
+  
   def password=(password)
     self.password_hash = BCrypt::Password.create(password)
   end

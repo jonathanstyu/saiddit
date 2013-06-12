@@ -41,8 +41,7 @@ class SubsController < ApplicationController
   # POST /subs
   # POST /subs.json
   def create
-    @sub = Sub.new(params[:sub])
-    @sub.moderator_id = @current_user.id
+    @sub = @current_user.moderating_subs.build(params[:sub])
 
     respond_to do |format|
       if @sub.save

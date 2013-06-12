@@ -9,8 +9,7 @@ class LinksController < ApplicationController
   end
   
   def create
-    @link = Link.new(params[:link])
-    @link.submitter_id = @current_user.id 
+    @link = @current_user.links.build(params[:link])
     if @link.save
       flash[:success] = "Save Worked"
       redirect_to link_path(@link)
