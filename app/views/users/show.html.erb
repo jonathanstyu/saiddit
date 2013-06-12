@@ -19,7 +19,7 @@
 
 <p>
 	<b>Comments:</b>
-	<%= render @user.comments %>
+	<%= render @user.comments.order("created_at DESC") %>
 	
 </p>
 
