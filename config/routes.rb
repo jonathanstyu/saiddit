@@ -4,9 +4,10 @@ Saiddit::Application.routes.draw do
   resources :links do 
     resources :comments, :only => [:create, :destroy]
   end
-  
 
   resources :users
   resource :session, :only => [:new, :create, :destroy]
+  
+  resources :comments, :only => [:show]
 
 end

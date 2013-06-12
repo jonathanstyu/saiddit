@@ -9,5 +9,7 @@ class Link < ActiveRecord::Base
   belongs_to :submitter, 
     :class_name => "User"
     
-  # validates :submitter
+  has_many :comments, 
+    :foreign_key => :link_id
+  # validates :submitter, :presence => true
 end

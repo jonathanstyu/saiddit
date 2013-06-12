@@ -1,0 +1,6 @@
+<p>
+	<b>Comment Title: <%= link_to comment.title, comment_path(comment) %></b><br>
+	<i><%= comment.text %></i><br>
+	Commented by: <%= comment.commenter.username %> on <%= comment.created_at.strftime("%D")%>
+	
+</p>

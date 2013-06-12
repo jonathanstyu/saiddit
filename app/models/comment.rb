@@ -1,8 +1,17 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :text, :commenter_id, :parent_comment_id, :link_id
+  attr_accessible :text, :commenter_id, :parent_comment_id, :link_id, :title
   
   belongs_to :commenter, 
     :class_name => "User"
     
   belongs_to :link 
+  
+  has_many :replies, 
+    :foreign_key => :parent_comment_id, 
+    :class_name => "Comment"
+    
+  belongs_to :replied_to, 
+    :class_name => "Comment",
+    :foreign_key => :parent_comment_id
+  
 end

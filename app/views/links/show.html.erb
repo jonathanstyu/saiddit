@@ -1,3 +1,24 @@
 <h2>See Link</h2>
 
 <%= render @link %>
+
+<h3>Make a Comment</h3>
+<form action="<%= link_comments_path(@link) %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="Title">Title</label><br><input type="text" name="comment[title]" value="" id="Title"><br>
+	<label for="Text">Text</label><br><textarea name="comment[text]" rows="3" cols="30" id="Text"></textarea><br>
+	<input type="hidden" name="comment[link_id]" value="<%= @link.id %>" id="comment[link_id]">
+	
+	<input type="submit" name="submit" value="Submit Comment" id="submit">
+</form>
+
+<%if @link.comments.count > 0%>
+<p>
+	<hr />
+	<h3>Other Comments</h3>
+	<% @link.comments.each do |comment| %>
+		<%= render comment %>
+		<%= link_to "Reply", comment_path(comment) %>
+	<%end%>
+</p>
+<%end%>

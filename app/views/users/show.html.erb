@@ -1,10 +1,27 @@
+<h2>User Profile Page</h2>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Username:</b>
+  <b>Username:</b><br>
   <%= @user.username %>
 </p>
 
+<p>
+  <b>Subjects Moderating:</b>
+  <%= render @user.moderating_subs %>
+</p>
+
+<p>
+	<b>Submitted Links:</b>
+	<%= render @user.submitted_links %>
+</p>
+
+<p>
+	<b>Comments:</b>
+	<%= render @user.comments %>
+	
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

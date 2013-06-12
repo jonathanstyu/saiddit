@@ -25,3 +25,8 @@ Linksub.create(link_id: 3, sub_id: 4)
 Linksub.create(link_id: 6, sub_id: 3)
 Linksub.create(link_id: 5, sub_id: 1)
 Linksub.create(link_id: 2, sub_id: 1)
+
+Comment.create(title: "haha!", text: "I thought so!", commenter_id: 1, parent_comment_id: nil, link_id: 1)
+Comment.create(title: "You said it!", text: "100% agree!", commenter_id: 2, parent_comment_id: 1, link_id: 1)
+Comment.create(title: "douchebags", text: "Very strong words dont uthink?", commenter_id: 4, parent_comment_id: nil, link_id: 6)
+Comment.create(title: "What songs", text: "SEnd to me!", commenter_id: 1, parent_comment_id: nil, link_id: 4)
