@@ -1,4 +1,4 @@
-<h2>See Link</h2>
+<h2>Link Show Page</h2>
 
 <%= render @link %>
 
@@ -16,9 +16,8 @@
 <p>
 	<hr />
 	<h3>Other Comments</h3>
-	<% @link.comments.each do |comment| %>
+	<% @link.comments.order("created_at DESC").each do |comment| %>
 		<%= render comment %>
-		<%= link_to "Reply", comment_path(comment) %>
 	<%end%>
 </p>
 <%end%>

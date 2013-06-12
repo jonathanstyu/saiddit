@@ -8,6 +8,8 @@ Saiddit::Application.routes.draw do
   resources :users
   resource :session, :only => [:new, :create, :destroy]
   
-  resources :comments, :only => [:show]
+  resources :comments, :only => [:show] do 
+    post 'reply'
+  end
 
 end
