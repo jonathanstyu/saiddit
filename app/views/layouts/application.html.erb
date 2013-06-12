@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	User: <%= @current_user ? @current_user.username : link_to("Sign In", new_session_path)%>
+	User: <%= @current_user ? @current_user.username : link_to("Sign In", new_session_path)%><br>
 	<%= flash[:error] if flash[:error] %>
 	<%= flash[:success] if flash[:success] %>
 	<hr>

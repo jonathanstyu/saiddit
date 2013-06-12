@@ -1,0 +1,22 @@
+<form action="<%= method == 'post' ? links_path : link_path(@link) %>" method="post">
+	<input type="hidden" name="_method" value="<%= method %>" id="_method">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="Title">Title</label><br>
+	<input type="text" name="link[title]" value="<%= @link.title %>" id="Title"><br>
+	
+	<label for="URL">URL</label><br>
+	<input type="text" name="link[url]" value="<%= @link.url %>" id="URL"><br>
+	
+	<label for="text">Text</label><br>
+	<textarea name="link[text]" rows="4" cols="30"><%= @link.text %></textarea><br>
+	
+	<label for="Linked Subs">Linked Subs</label><br>
+	<% Sub.all.each do |sub| %>
+	<input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>" id="linked_<%= sub.id%>">
+	<label for="linked_<%= sub.id%>"><%= sub.category %></label>
+	<%end%>
+	<br><br>
+		
+	<input type="submit" name="submit" value="Submit Information" id="submit" class="btn">
+	
+</form>

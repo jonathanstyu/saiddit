@@ -1,4 +1,6 @@
-<h1>Listing subs</h1>
+<h1>Welcome to Saiddit!</h1>
+
+<p>A Reddit ripoff for the ages! Log in if you want to create subs.</p>
 
 <table>
   <tr>
@@ -15,7 +17,7 @@
     <td><%= User.find_by_id(sub.moderator_id).username %></td>
     <td><%= link_to 'Show', sub %></td>
     <td><%= link_to 'Edit', edit_sub_path(sub) %></td>
-    <td><%= link_to 'Destroy', sub, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= button_to 'Destroy', sub_path(sub), method: :delete %></td>
   </tr>
 <% end %>
 </table>

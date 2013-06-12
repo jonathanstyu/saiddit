@@ -1,4 +1,6 @@
 class SubsController < ApplicationController
+  before_filter :check_admin, :only => [:destroy, :edit]
+  before_filter :user_logged_in, :only => [:new]
   # GET /subs
   # GET /subs.json
   def index
@@ -25,7 +27,6 @@ class SubsController < ApplicationController
   # GET /subs/new.json
   def new
     @sub = Sub.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @sub }
@@ -34,26 +35,21 @@ class SubsController < ApplicationController
 
   # GET /subs/1/edit
   def edit
-    # Makes sure that someone cannot create a 
-    if @current_user.id 
-      @sub = Sub.find(params[:id])
-      render :edit
-    else
-      flash[:error] = "You cannot edit this sub because you are not the moderator"
-      redirect_to user_path(@current_user)
-    end
+    render :edit
   end
 
   # POST /subs
   # POST /subs.json
   def create
     @sub = Sub.new(params[:sub])
+    @sub.moderator_id = @current_user.id
 
     respond_to do |format|
       if @sub.save
         format.html { redirect_to @sub, notice: 'Sub was successfully created.' }
         format.json { render json: @sub, status: :created, location: @sub }
       else
+        flash[:error] = "There was an error #{@sub.errors.messages}"
         format.html { render action: "new" }
         format.json { render json: @sub.errors, status: :unprocessable_entity }
       end
@@ -79,12 +75,25 @@ class SubsController < ApplicationController
   # DELETE /subs/1
   # DELETE /subs/1.json
   def destroy
-    @sub = Sub.find(params[:id])
     @sub.destroy
-
-    respond_to do |format|
-      format.html { redirect_to subs_url }
-      format.json { head :no_content }
+  end
+  
+  private
+  
+  def check_admin
+    @sub = Sub.find(params[:id])
+    # Makes sure that someone cannot edit/destroy a subs page
+    unless @current_user && @current_user.id == @sub.moderator_id
+      flash[:error] = "You cannot edit or delete this sub because you are not the moderator"
+      redirect_to :back
     end
   end
+  
+  def user_logged_in
+    unless @current_user
+      flash[:error] = "Please Log In"
+      redirect_to new_session_path
+    end
+  end
+  
 end

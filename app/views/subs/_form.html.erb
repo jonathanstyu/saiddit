@@ -3,6 +3,22 @@
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 	<label for="Category">Category</label><br>
 	<input type="text" name="sub[category]" value="<%= @sub.category %>" id="Category"><br>
+
+	<h3>Create Links</h3>
+	<p>Start out your new sub with some links!</p><hr>
+	<% 1.upto(5) do |i|%>
+	<label for="Title_<%=i%>">Link Title: <%=i%></label><br>
+	<input type="text" name="sub[links_attributes][<%=i%>][title]" value="" id="Title_<%=i%>"><br>
+	
+	<label for="URL_<%=i%>">Link URL: <%=i%></label><br>
+	<input type="text" name="sub[links_attributes][<%=i%>][url]" value="" id="URL_<%=i%>"><br>
+	
+	<label for="text_<%=i%>">Link Text: <%=i%></label><br>
+	<textarea name="sub[links_attributes][<%=i%>][text]" rows="4" cols="30"></textarea><br>
+	
+	<input type="hidden" name="sub[links_attributes][<%=i%>][submitter_id]" value="<%= @current_user.id %>">
+	<hr>
+	<%end%>
 		
 	<input type="submit" name="submit" value="Submit Information" id="submit">
 	

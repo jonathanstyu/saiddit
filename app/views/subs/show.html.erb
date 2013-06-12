@@ -2,7 +2,7 @@
 
 <h3>Category: <%= @sub.category.capitalize %></h3>
 
-<b>Moderator:</b> <%= User.find_by_id(@sub.moderator_id).username.capitalize %>
+<b>Moderator:</b> <u><%= User.find_by_id(@sub.moderator_id).username.capitalize %></u>
 
 <h3>Links for Sub</h3>
 <%= render @sub.links %>

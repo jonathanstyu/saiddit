@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
     @current_user.token = nil 
     @current_user.save!
     session[:token] = nil 
+    redirect_to subs_path
   end
   
 end
