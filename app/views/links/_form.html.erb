@@ -17,12 +17,15 @@
 	<%end%>
 	
 	<% if method == 'post'%>
-	<h4>Comment on Link</h4>
-	<label for="Title">Title</label><br><input type="text" name="link[comments_attributes][0][title]" value="" id="Title"><br>
-	<label for="Text">Text</label><br><textarea name="link[comments_attributes][0][text]" rows="3" cols="30" id="Text"></textarea><br>
-	<input type="hidden" name="link[comments_attributes][0][commenter_id]" value="<%= @current_user.id %>" id="Title">
+		<% @link.comments.each_with_index do |comment, i|%>
+		<h4>Comment on Link</h4>
+		<label for="Title">Title</label><br>
+		<input type="text" name="link[comments_attributes][<%= i %>][title]" value="<%= comment.title %>" id="Title"><br>
+		<label for="Text">Text</label><br>
+		<textarea name="link[comments_attributes][<%= i %>][text]" rows="3" cols="30" id="Text"><%= comment.text %></textarea><br>
+		<input type="hidden" name="link[comments_attributes][<%= i %>][id]" value="<%= comment.id %>" id="some_name">
+		<%end%>
 	<%end%>
-	
 	<br><br>
 		
 	<input type="submit" name="submit" value="Submit Information" id="submit" class="btn">

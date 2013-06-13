@@ -1,7 +1,9 @@
 class LinksController < ApplicationController
   before_filter :user_logged_in
+  
   def new
     @link = Link.new
+    @comment = @link.comments.build(commenter_id: @current_user.id)
   end
   
   def show
