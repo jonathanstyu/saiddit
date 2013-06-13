@@ -27,6 +27,7 @@ class SubsController < ApplicationController
   # GET /subs/new.json
   def new
     @sub = Sub.new
+    5.times {@sub.links.build(submitter_id: @current_user.id)}
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @sub }

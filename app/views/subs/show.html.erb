@@ -8,7 +8,13 @@
 <p>
 	<% @sub.links.each do |link| %>
 		<b><%= link_to link.title, link_path(link) %></b><br>
-		URL: <%=link.url%><br><br>
+		URL: <%=link.url%><br>
+		<% @votes = link.votes %>
+			<%= link_to "Up", link_upvote_path(link), :method => "post" %>
+			(<%= @votes.where("vote_value = 'up'").count %> upvotes)
+			|
+			<%= link_to "Down", link_downvote_path(link), :method => "post" %> 
+			(<%= @votes.where("vote_value = 'down'").count %> downvotes)<br><br>
 	<%end%>
 </p>
 <%= link_to 'Edit', edit_sub_path(@sub) %> |

@@ -35,6 +35,12 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    if @current_user == @user
+      render :edit
+    else
+      flash[:error] = "You cannot edit this user"
+      redirect_to :back
+    end
   end
 
   # POST /users

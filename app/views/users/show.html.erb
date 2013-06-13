@@ -20,6 +20,7 @@
 <p>
 	<b>Comments:</b>
 	<%= render @user.comments.order("created_at DESC") %>
+	<%= "None Submitted!" if @user.comments.empty? %>
 	
 </p>
 

@@ -19,6 +19,16 @@ class LinksController < ApplicationController
     end
   end
   
+  def upvote
+    @current_user.votes.create(link_id: params[:link_id], vote_value: "up")
+    redirect_to :back
+  end
+  
+  def downvote
+    @current_user.votes.create(link_id: params[:link_id], vote_value: "down")
+    redirect_to :back
+  end
+  
   private
   def user_logged_in
     unless @current_user

@@ -8,7 +8,8 @@ class Comment < ActiveRecord::Base
   
   has_many :replies, 
     :foreign_key => :parent_comment_id, 
-    :class_name => "Comment"
+    :class_name => "Comment", 
+    :dependent => :destroy 
     
   belongs_to :replied_to, 
     :class_name => "Comment",

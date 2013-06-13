@@ -10,8 +10,12 @@ class Link < ActiveRecord::Base
     :class_name => "User"
     
   has_many :comments, 
-    :foreign_key => :link_id
+    :foreign_key => :link_id, 
+    :dependent => :destroy 
   # validates :submitter, :presence => true
+  
+  has_many :votes,
+    :class_name => "UserVote"
   
   accepts_nested_attributes_for :comments
 end

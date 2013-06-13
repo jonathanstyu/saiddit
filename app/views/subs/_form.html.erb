@@ -6,17 +6,19 @@
 
 	<h3>Create Links</h3>
 	<p>Start out your new sub with some links!</p><hr>
-	<% 1.upto(5) do |i|%>
+	<% @sub.links.each_with_index do |link, i| %>
 	<label for="Title_<%=i%>">Link Title: <%=i%></label><br>
-	<input type="text" name="sub[links_attributes][<%=i%>][title]" value="" id="Title_<%=i%>"><br>
+	<input type="text" name="sub[links_attributes][<%=i%>][title]" value="<%= link.title %>" id="Title_<%=i%>"><br>
 	
 	<label for="URL_<%=i%>">Link URL: <%=i%></label><br>
-	<input type="text" name="sub[links_attributes][<%=i%>][url]" value="" id="URL_<%=i%>"><br>
+	<input type="text" name="sub[links_attributes][<%=i%>][url]" value="<%= link.url %>" id="URL_<%=i%>"><br>
 	
 	<label for="text_<%=i%>">Link Text: <%=i%></label><br>
-	<textarea name="sub[links_attributes][<%=i%>][text]" rows="4" cols="30"></textarea><br>
+	<textarea name="sub[links_attributes][<%=i%>][text]" rows="4" cols="30"><%= link.text %></textarea><br>
 	
-	<input type="hidden" name="sub[links_attributes][<%=i%>][submitter_id]" value="<%= @current_user.id %>">
+	<!-- Including the ID makes sure that submitting this edit does not create duplicate items int the database -->
+	<input type="hidden" name="sub[links_attributes][<%=i%>][id]" value="<%= link.id %>">
+
 	<hr>
 	<%end%>
 		

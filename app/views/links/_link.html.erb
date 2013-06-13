@@ -1,4 +1,13 @@
 <u><h4><%= link_to link.title, link_path(link) %></h4></u>
-<p>URL: <%=link.url%><br>
-Submitted By: <%= link.submitter.username.capitalize %><br>
-<%= link.text %></p>
+<p>
+	URL: <%=link.url%><br>
+	Submitted By: <%= link.submitter.username.capitalize %><br>
+	<%= link.text %><br>
+	<b>VOTE:</b> 
+	<% @votes = link.votes %>
+		<%= link_to "Up", link_upvote_path(link), :method => "post" %>
+		(<%= @votes.where("vote_value = 'up'").count %> upvotes)
+		|
+		<%= link_to "Down", link_downvote_path(link), :method => "post" %> 
+		(<%= @votes.where("vote_value = 'down'").count %> downvotes)
+</p>

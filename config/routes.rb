@@ -3,6 +3,8 @@ Saiddit::Application.routes.draw do
   resources :subs
   resources :links do 
     resources :comments, :only => [:create, :destroy]
+    post 'upvote'
+    post 'downvote'
   end
 
   resources :users

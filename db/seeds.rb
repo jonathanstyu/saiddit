@@ -30,3 +30,11 @@ Comment.create(title: "haha!", text: "I thought so!", commenter_id: 1, parent_co
 Comment.create(title: "You said it!", text: "100% agree!", commenter_id: 2, parent_comment_id: 1, link_id: 1)
 Comment.create(title: "douchebags", text: "Very strong words dont uthink?", commenter_id: 4, parent_comment_id: nil, link_id: 6)
 Comment.create(title: "What songs", text: "SEnd to me!", commenter_id: 1, parent_comment_id: nil, link_id: 4)
+
+UserVote.create(voter_id: 1, link_id: 1, vote_value: "up")
+UserVote.create(voter_id: 1, link_id: 2, vote_value: "down")
+UserVote.create(voter_id: 1, link_id: 4, vote_value: "up")
+UserVote.create(voter_id: 2, link_id: 1, vote_value: "up")
+UserVote.create(voter_id: 3, link_id: 1, vote_value: "up")
+UserVote.create(voter_id: 4, link_id: 1, vote_value: "up")
+UserVote.create(voter_id: 3, link_id: 2, vote_value: "down")
