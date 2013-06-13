@@ -4,6 +4,16 @@
 	<%= render @comment %>
 </p>
 
+<h3>Reply to this Comment</h3>
+<form action="<%= comment_reply_path(@comment) %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="Title">Title</label><br><input type="text" name="comment[title]" value="RE:<%= @comment.title %>" id="Title"><br>
+	<label for="Text">Text</label><br><textarea name="comment[text]" rows="3" cols="30" id="Text"></textarea><br>
+	<input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>" id="comment[parent_comment_id]">
+	
+	<input type="submit" name="submit" value="Submit Reply" id="submit">
+</form>
+
 <%if @comment.replies.count > 0%>
 <p>
 	<hr />
@@ -14,13 +24,3 @@
 	<%end%>
 </p>
 <%end%>
-
-<h3>Reply to this Comment</h3>
-<form action="<%= comment_reply_path(@comment) %>" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<label for="Title">Title</label><br><input type="text" name="comment[title]" value="RE:<%= @comment.title %>" id="Title"><br>
-	<label for="Text">Text</label><br><textarea name="comment[text]" rows="3" cols="30" id="Text"></textarea><br>
-	<input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>" id="comment[parent_comment_id]">
-	
-	<input type="submit" name="submit" value="Submit Reply" id="submit">
-</form>

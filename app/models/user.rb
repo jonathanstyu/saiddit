@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   
   has_many :comments, 
     :foreign_key => :commenter_id, 
-    :dependent => :destroy 
+    :dependent => :destroy, 
+    :inverse_of => :commenter
   
   has_many :votes, 
     :foreign_key => :voter_id,

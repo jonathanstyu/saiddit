@@ -1,6 +1,10 @@
 class Comment < ActiveRecord::Base
   attr_accessible :text, :commenter_id, :parent_comment_id, :link_id, :title
   
+  validates :title, :text, :presence => true 
+  
+  validates :commenter, :presence => true
+  
   belongs_to :commenter, 
     :class_name => "User"
     
