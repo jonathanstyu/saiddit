@@ -17,5 +17,10 @@ class Link < ActiveRecord::Base
   has_many :votes,
     :class_name => "UserVote"
   
-  accepts_nested_attributes_for :comments
+  accepts_nested_attributes_for :comments, :reject_if => :missing_text_title
+  
+  def missing_text_title(attributes)
+    attributes['title'].blank? || attributes['text'].blank?
+  end
+  
 end

@@ -9,6 +9,6 @@ class Sub < ActiveRecord::Base
   
   # All blank is something that is already used by Rails 
   def title_url_blank(attributed)
-    attributed['title'].blank? && attributed['url'].blank?
+    attributed['title'].blank? || attributed['url'].blank?
   end
 end
