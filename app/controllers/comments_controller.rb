@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to @comment.link, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        format.html { render action: "new" }
+        format.html { render :back }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -58,11 +58,11 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        flash[:success] = "Successfully saved!"
         format.html { redirect_to @comment.replied_to, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment, status: :created, location: @comment }
       else
-        format.html { render action: "new" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        flash[:error] = "Please attach text to your comment reply"
+        format.html { redirect_to comment_path(params[:comment_id]) }
       end
     end
   end
