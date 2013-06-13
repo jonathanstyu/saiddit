@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if user && user.verify_password(params[:password])
       session[:token] = user.generate_session_token! 
       flash[:success] = "Sign in successful"
-      redirect_to user_path(user)
+      redirect_to subs_path
     else
       flash[:error] = "Password failed"
       redirect_to :back

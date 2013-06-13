@@ -1,7 +1,7 @@
 Saiddit::Application.routes.draw do
   root :to => 'subs#index'
   resources :subs
-  resources :links do 
+  resources :links, :except => [:index] do 
     resources :comments, :only => [:create, :destroy]
     post 'upvote'
     post 'downvote'

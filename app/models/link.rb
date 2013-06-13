@@ -12,7 +12,8 @@ class Link < ActiveRecord::Base
   has_many :comments, 
     :foreign_key => :link_id, 
     :dependent => :destroy 
-  # validates :submitter, :presence => true
+    
+  validates :submitter, :presence => true
   
   has_many :votes,
     :class_name => "UserVote"

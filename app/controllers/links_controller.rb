@@ -7,7 +7,7 @@ class LinksController < ApplicationController
   end
   
   def show
-    @link = Link.find(params[:id])
+    @link = Link.includes(:votes, :comments).find(params[:id])
   end
   
   def create

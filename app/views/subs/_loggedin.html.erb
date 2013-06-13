@@ -1,0 +1,30 @@
+<h1>Welcome, <%= @current_user.username.capitalize %>!</h1>
+
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Links</th>
+    <th>Moderator</th>
+    <th>Edit?</th>
+    <th>Destroy?</th>
+  </tr>
+	
+<% @subs.each do |sub| %>
+  <tr>
+    <td><%= link_to sub.category, sub %></td>
+		<td><%= sub.links.count %></td>
+    <td><%= sub.moderator.username %></td>
+		
+		<!-- Block out code to modify if they are not moderator -->
+		<% if @current_user == sub.moderator %>
+    <td><%= link_to 'Edit', edit_sub_path(sub) %></td>
+    <td><%= button_to 'Destroy', sub_path(sub), method: :delete %></td>
+		<%else%>
+		<td><strike>Edit</strike></td>
+		<td><strike>Destroy</strike></td>
+		<%end%>
+  </tr>
+<% end %>
+</table>
+
+<br />

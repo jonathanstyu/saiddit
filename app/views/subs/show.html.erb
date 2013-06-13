@@ -5,18 +5,28 @@
 <b>Moderator:</b> <u><%= link_to @sub.moderator.username.capitalize, user_path(@sub.moderator) %></u>
 
 <h3>Links for Sub</h3>
-<p>
-	<% @sub.links.each do |link| %>
-		<b><%= link_to link.title, link_path(link) %></b><br>
-		URL: <%=link.url%><br>
-		<% @votes = link.votes %>
-			<%= link_to "Up", link_upvote_path(link), :method => "post" %>
-			(<%= @votes.where("vote_value = 'up'").count %> upvotes)
-			|
-			<%= link_to "Down", link_downvote_path(link), :method => "post" %> 
-			(<%= @votes.where("vote_value = 'down'").count %> downvotes)<br><br>
-	<%end%>
-</p>
+<table>
+  <tr>
+    <th>Link Title</th>
+    <th>URL</th>
+    <th>Submitter</th>
+    <th>Vote It Up!</th>
+    <th>Vote It Down!</th>
+  </tr>
+	
+<% @sub.links.each do |link| %>
+  <tr>
+    <td><%= link_to link.title, link %></td>
+		<td><%= link.url %></td>
+    <td><%= link.submitter.username %></td>
+		<td><%= link_to "Up", link_upvote_path(link), :method => "post" %>(<%= link.votes.where("vote_value = 'up'").count %>)</td>
+		<td><%= link_to "Down", link_downvote_path(link), :method => "post" %>(<%= link.votes.where("vote_value = 'down'").count %>)</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
 <%= link_to 'Edit', edit_sub_path(@sub) %> |
 <%= link_to 'Back', subs_path %> |
 <%= link_to 'Add New Link', new_link_path %>

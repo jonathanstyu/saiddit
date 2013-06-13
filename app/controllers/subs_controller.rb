@@ -15,7 +15,7 @@ class SubsController < ApplicationController
   # GET /subs/1
   # GET /subs/1.json
   def show
-    @sub = Sub.find(params[:id])
+    @sub = Sub.includes(:links => [:votes]).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,7 +43,7 @@ class SubsController < ApplicationController
   # POST /subs.json
   def create
     @sub = @current_user.moderating_subs.build(params[:sub])
-
+    @sub.links.each {|link| link.submitter_id = @current_user.id}
     respond_to do |format|
       if @sub.save
         format.html { redirect_to @sub, notice: 'Sub was successfully created.' }
@@ -76,6 +76,7 @@ class SubsController < ApplicationController
   # DELETE /subs/1.json
   def destroy
     @sub.destroy
+    redirect_to :back
   end
   
   private

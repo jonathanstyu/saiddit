@@ -1,26 +1,7 @@
-<h1>Welcome to Saiddit!</h1>
-
-<p>A Reddit ripoff for the ages! Log in if you want to create subs.</p>
-
-<table>
-  <tr>
-    <th>Category</th>
-    <th>Moderator</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @subs.each do |sub| %>
-  <tr>
-    <td><%= link_to sub.category, sub %></td>
-    <td><%= User.find(sub.moderator_id).username %></td>
-    <td><%= link_to 'Edit', edit_sub_path(sub) %></td>
-    <td><%= button_to 'Destroy', sub_path(sub), method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<% if @current_user %>
+<%= render :partial => 'loggedin'%>
+<%else%>
+	<%= render :partial => 'unlogged' %>
+<%end%>
 
 <%= link_to 'New Sub', new_sub_path %>
