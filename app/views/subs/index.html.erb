@@ -14,7 +14,7 @@
 <% @subs.each do |sub| %>
   <tr>
     <td><%= link_to sub.category, sub %></td>
-    <td><%= User.find_by_id(sub.moderator_id).username %></td>
+    <td><%= User.find(sub.moderator_id).username %></td>
     <td><%= link_to 'Edit', edit_sub_path(sub) %></td>
     <td><%= button_to 'Destroy', sub_path(sub), method: :delete %></td>
   </tr>

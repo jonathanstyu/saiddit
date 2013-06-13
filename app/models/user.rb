@@ -3,7 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :token, :username, :password
   
-  validates :token, :username, :presence => true 
+  validates :username, :presence => true 
   
   has_many :moderating_subs, 
     :class_name => "Sub", 

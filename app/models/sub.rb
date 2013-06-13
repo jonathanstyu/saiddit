@@ -1,7 +1,7 @@
 class Sub < ActiveRecord::Base
   attr_accessible :moderator_id, :category, :link_ids, :links_attributes
   
-  belongs_to :moderator
+  belongs_to :moderator, :class_name => "User"
   has_many :linksubs
   has_many :links, :through => :linksubs
   
